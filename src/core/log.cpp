@@ -1,8 +1,20 @@
 #include "log.h"
+#include <vector>
+#include <memory>
+namespace snowray::log {
 
-namespace ray::log {
+static bool gLevelSet = false;
+static std::vector<std::shared_ptr<spdlog::logger>> gLoggers = {
+    spdlog::stdout_color_mt("snow-ray"),
+    spdlog::rotating_logger_mt("snow-ray-file", "logging.txt",  1048576 * 5, 3)
+};
 
-auto file_log    = spdlog::basic_logger_mt("basic_logger", "snow-ray-log.txt");
-auto console_log = spdlog::stdout_color_mt("console");
+std::vector<std::shared_ptr<spdlog::logger>> &Loggers() {
+    if (!gLevelSet) {
+        spdlog::set_level(__RAY_LOG_LEVEL__);
+        gLevelSet = true;
+    }
+    return gLoggers;
+}
 
 }

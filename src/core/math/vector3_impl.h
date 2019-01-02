@@ -3,7 +3,7 @@
 #include <typeinfo>
 
 
-namespace ray::math {
+namespace snowray::math {
 
 
 /**
@@ -68,8 +68,8 @@ template <class Scalar> inline const Vector3<Scalar> Cross(const Vector3<Scalar>
     );
 }
 // stream
-template <class Scalar> inline std::ostream &operator<<(std::ostream &out, const Vector3<Scalar> &a) {
-    out << "Vector3<" << typeid(Scalar).name() << ">: [" << a.x << ", " << a.y << ", " << a.z << "]";
+template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector3<Scalar> &a) {
+    out << "vec3<" << typeid(Scalar).name() << ">: [" << a.x << ", " << a.y << ", " << a.z << "]";
     return out;
 }
 

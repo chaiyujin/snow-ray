@@ -1,9 +1,8 @@
 #pragma once
 #include "base.h"
-#include "vector2_impl.h"
-#include <iostream>
+#include "vector2.h"
 
-namespace ray::math {
+namespace snowray::math {
 
 /**
  * Vector3
@@ -66,7 +65,7 @@ template <class Scalar> inline const Vector3<Scalar> operator*(Scalar scale, con
 template <class Scalar> inline const Scalar          Dot(const Vector3<Scalar> &a, const Vector3<Scalar> &b);
 template <class Scalar> inline const Vector3<Scalar> Cross(const Vector3<Scalar> &a, const Vector3<Scalar> &b);
 // stream
-template <class Scalar> inline std::ostream &operator<<(std::ostream &out, const Vector3<Scalar> &a);
+template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector3<Scalar> &a);
 
 
 }

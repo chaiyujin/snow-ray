@@ -2,7 +2,7 @@
 #include "vector2.h"
 #include <typeinfo>
 
-namespace ray::math {
+namespace snowray::math {
 
 /**
  * Float2 implemention
@@ -59,8 +59,8 @@ template<class Scalar> inline const Vector2<Scalar> operator*(Scalar scale, cons
 template<class Scalar> inline const Scalar  Dot(const Vector2<Scalar> &a, const Vector2<Scalar> &b)   { return a.x * b.x + a.y * b.y; }
 template<class Scalar> inline const Scalar  Cross(const Vector2<Scalar> &a, const Vector2<Scalar> &b) { return a.x * b.y - a.y * b.x; }
 
-template<class Scalar> inline std::ostream &operator<<(std::ostream &out, const Vector2<Scalar> &a) {
-    out << "Vector2<" << typeid(Scalar).name() << ">: [" << a.x << ", " << a.y << "]";
+template<class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector2<Scalar> &a) {
+    out << "vec2<" << typeid(Scalar).name() << ">: [" << a.x << ", " << a.y << "]";
     return out;
 }
 

@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdint.h>
 
-namespace ray {
+namespace snowray {
 
 // define Float
 #ifdef USING_DOUBLE_PRECISION
