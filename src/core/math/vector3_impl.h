@@ -3,7 +3,8 @@
 #include <typeinfo>
 
 
-namespace snowray::math {
+namespace snowray {
+namespace math {
 
 
 /**
@@ -77,4 +78,5 @@ typedef Vector3<Float>    Float3;
 typedef Vector3<int32_t>  Int3;
 typedef Vector3<uint32_t> UInt3;
 
+}
 }

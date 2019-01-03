@@ -12,6 +12,9 @@ typedef float Float;
 #endif
 
 // aligned
+#ifdef WIN32
+#define ALIGNED(bytes) __declspec(align(bytes))
+#else
 #define ALIGNED(bytes) __attribute__((aligned(bytes)))
-
+#endif
 }

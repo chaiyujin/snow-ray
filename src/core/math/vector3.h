@@ -2,7 +2,8 @@
 #include "base.h"
 #include "vector2.h"
 
-namespace snowray::math {
+namespace snowray {
+namespace math {
 
 /**
  * Vector3
@@ -67,5 +68,5 @@ template <class Scalar> inline const Vector3<Scalar> Cross(const Vector3<Scalar>
 // stream
 template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector3<Scalar> &a);
 
-
+}
 }

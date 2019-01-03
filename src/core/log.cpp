@@ -1,7 +1,8 @@
 #include "log.h"
 #include <vector>
 #include <memory>
-namespace snowray::log {
+namespace snowray {
+namespace log {
 
 static bool gLevelSet = false;
 static std::vector<std::shared_ptr<spdlog::logger>> gLoggers = {
@@ -17,4 +18,5 @@ std::vector<std::shared_ptr<spdlog::logger>> &Loggers() {
     return gLoggers;
 }
 
+}
 }

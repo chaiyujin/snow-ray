@@ -12,7 +12,8 @@
 #define __RAY_LOG_LEVEL__ spdlog::level::trace
 #endif
 
-namespace snowray::log {
+namespace snowray {
+namespace log {
 
 std::vector<std::shared_ptr<spdlog::logger>> &Loggers();
 
@@ -23,10 +24,13 @@ template<typename... Args> inline void error(const char *fmt, const Args &... ar
 template<typename... Args> inline void fatal(const char *fmt, const Args &... args) { for (auto logger : Loggers()) logger->critical(fmt, args...); exit(1); }
 
 #ifdef NDEBUG
+
 template<typename... Args> inline void debug(const char *fmt, const Args &... args) {}
 template<typename... Args> inline void assertion(bool flag, const char *fmt, const Args &... args) {}
 template<typename... Args> inline void assertion(bool flag) {}
+
 #else
+
 template<typename... Args> inline void debug(const char *fmt, const Args &... args) { for (auto logger : Loggers()) logger->debug(fmt, args...); }
 template<typename... Args> inline void assertion(bool flag, const char *fmt, const Args &... args) {
     if (!flag) {
@@ -42,6 +46,8 @@ template<typename... Args> inline void assertion(bool flag) {
         exit(1);
     }
 }
+
 #endif
 
+}
 }

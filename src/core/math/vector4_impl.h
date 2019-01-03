@@ -1,7 +1,8 @@
 #pragma once
 #include "vector4.h"
 
-namespace snowray::math {
+namespace snowray {
+namespace math {
 
 template <class Scalar> inline Vector4<Scalar>::Vector4(): x(0), y(0), z(0), w(0) {}
 template <class Scalar> inline Vector4<Scalar>::Vector4(const Vector4<Scalar>& b): x(b.x), y(b.y), z(b.z), w(b.w) {}
@@ -142,4 +143,5 @@ template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, 
     return out;
 }
 
+}
 }

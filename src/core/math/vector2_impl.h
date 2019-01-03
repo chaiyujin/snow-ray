@@ -2,7 +2,8 @@
 #include "vector2.h"
 #include <typeinfo>
 
-namespace snowray::math {
+namespace snowray {
+namespace math {
 
 /**
  * Float2 implemention
@@ -68,4 +69,5 @@ typedef Vector2<Float>    Float2;
 typedef Vector2<int32_t>  Int2;
 typedef Vector2<uint32_t> UInt2;
 
+}
 }

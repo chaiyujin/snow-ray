@@ -22,6 +22,6 @@ int main() {
         std::cout << Cross(v0, v1) << std::endl;
         snowray::log::info("float3 {}", v0);
     }
-
+	getchar();
     return 0;
 }

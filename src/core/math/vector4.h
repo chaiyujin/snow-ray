@@ -3,7 +3,8 @@
 #include "vector2.h"
 #include "vector3.h"
 
-namespace snowray::math {
+namespace snowray {
+namespace math {
 
 template <class Scalar>
 struct ALIGNED(16) Vector4 {
@@ -67,4 +68,5 @@ template <class Scalar> inline const Vector4<Scalar> Cross3(const Vector4<Scalar
 // stream
 template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector4<Scalar> &a);
 
+}
 }

@@ -1,7 +1,8 @@
 #pragma once
 #include "base.h"
 
-namespace snowray::math {
+namespace snowray {
+namespace math {
 
 /**
  * Vector2
@@ -65,4 +66,5 @@ template<class Scalar> inline const Scalar  Cross(const Vector2<Scalar> &a, cons
 // stream
 template<class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector2<Scalar> &a);
 
+}
 }
