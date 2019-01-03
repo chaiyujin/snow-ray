@@ -125,5 +125,21 @@ template <class Scalar> inline const Vector4<Scalar> Sqrt(const Vector4<Scalar> 
 template <class Scalar> inline const Vector4<Scalar> operator*(Scalar scale, const Vector4<Scalar> &a) {
     return a * scale;
 }
+template <class Scalar> inline const Scalar Dot3(const Vector4<Scalar> &a, const Vector4<Scalar> &b) {
+    return a.x*b.x + a.y*b.y + a.z*b.z;
+}
+template <class Scalar> inline const Vector4<Scalar> Cross3(const Vector4<Scalar> &a, const Vector4<Scalar> &b) {
+    return Vector4<Scalar>(
+        a.y*b.z-a.z*b.y,
+        a.z*b.x-a.x*b.z,
+        a.x*b.y-a.y*b.x,
+        0
+    );
+}
+// stream
+template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector4<Scalar> &a) {
+    out << "vec4<" << typeid(Scalar).name() << ">: [" << a.x << ", " << a.y << ", " << a.z << ", " << a.w << "]";
+    return out;
+}
 
 }

@@ -62,8 +62,8 @@ struct ALIGNED(16) Vector4 {
 template <class Scalar> inline const Vector4<Scalar> Floor(const Vector4<Scalar> &a);
 template <class Scalar> inline const Vector4<Scalar> Sqrt(const Vector4<Scalar> &a);
 template <class Scalar> inline const Vector4<Scalar> operator*(Scalar scale, const Vector4<Scalar> &a);
-template <class Scalar> inline const Scalar          Dot(const Vector4<Scalar> &a, const Vector4<Scalar> &b);
-template <class Scalar> inline const Vector4<Scalar> Cross(const Vector4<Scalar> &a, const Vector4<Scalar> &b);
+template <class Scalar> inline const Scalar          Dot3(const Vector4<Scalar> &a, const Vector4<Scalar> &b);
+template <class Scalar> inline const Vector4<Scalar> Cross3(const Vector4<Scalar> &a, const Vector4<Scalar> &b);
 // stream
 template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, const Vector4<Scalar> &a);
 
