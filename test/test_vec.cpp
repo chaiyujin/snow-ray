@@ -1,6 +1,6 @@
 #include <iostream>
 #include <core/core.h>
-using namespace snowray::math;
+using namespace snowray;
 
 int main() {
     {
@@ -22,6 +22,14 @@ int main() {
         std::cout << Cross(v0, v1) << std::endl;
         snowray::log::info("float3 {}", v0);
     }
-	getchar();
+    {
+        AABB2f bbox2f;
+        Float2 p(0, 0);
+        bbox2f + p;
+        bbox2f += p;
+        bbox2f.expand(20);
+        snowray::log::info("bbox is {}", bbox2f);
+        std::cout << bbox2f.lerp(Float2(0, 1));
+    }
     return 0;
 }
