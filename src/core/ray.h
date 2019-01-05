@@ -1,7 +1,7 @@
 #pragma once
 #include "vec.h"
 
-namespace snowray {
+namespace snowrt {
 
 class Ray {
     Float3 mPos;
@@ -10,10 +10,14 @@ class Ray {
     Float  mTimeMax;
 public:
     Ray() : mTime(0.f), mTimeMax(constants::Infinity) {}
-    Ray(const Float3& pos, const Float3& dir, Float time=0.f,
-        Float timeMax=constants::Infinity) : mPos(pos), mDir(dir), mTime(time), mTimeMax(timeMax) {}
+    Ray(const Float3& pos, const Float3& dir, Float time=0.f, Float timeMax=constants::Infinity)
+        : mPos(pos), mDir(dir), mTime(time), mTimeMax(timeMax) {}
+    Ray(const Ray& b): mPos(b.mPos), mDir(b.mDir), mTime(b.mTime), mTimeMax(b.mTimeMax) {}
+    virtual ~Ray() {}
     
     Float3 operator()(Float t) const { return mPos + mDir * t; }
+    const Float3 &origin() const { return mPos; }
+    const Float3 &direction() const { return mDir; }
 };
 
 }

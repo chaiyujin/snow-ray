@@ -5,7 +5,7 @@
 /* ====================
    _Vector2 Declaration
    ==================== */
-namespace snowray {
+namespace snowrt {
 
 template <class Scalar>
 struct ALIGNED(16) _Vector2 {
@@ -71,7 +71,7 @@ template<class Scalar, class ostream> inline ostream &operator<<(ostream &out, c
 /* ====================
    _Vector3 Declaration
    ==================== */
-namespace snowray {
+namespace snowrt {
 
 template <class Scalar>
 struct ALIGNED(16) _Vector3 {
@@ -138,7 +138,7 @@ template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, 
 /* ===================
    _Vector2 Definition
    =================== */
-namespace snowray {
+namespace snowrt {
 
 template<class Scalar> inline _Vector2<Scalar>::_Vector2() : x(0), y(0) {}
 template<class Scalar> inline _Vector2<Scalar>::_Vector2(Scalar a) : x(a), y(0) {}
@@ -205,7 +205,7 @@ typedef _Vector2<uint32_t> UInt2;
 /* ===================
    _Vector3 Definition
    =================== */
-namespace snowray {
+namespace snowrt {
 
 template <class Scalar> inline _Vector3<Scalar>::_Vector3() : x(0), y(0), z(0) {}
 template <class Scalar> inline _Vector3<Scalar>::_Vector3(const _Vector3<Scalar> &b) : x(b.x), y(b.y), z(b.z) {}

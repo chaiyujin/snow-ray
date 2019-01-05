@@ -5,7 +5,7 @@
 /* ====================
    _Vector4 Declaration
    ==================== */
-namespace snowray {
+namespace snowrt {
 
 template <class Scalar>
 struct ALIGNED(16) _Vector4 {
@@ -74,7 +74,7 @@ template <class Scalar, class ostream> inline ostream &operator<<(ostream &out, 
 /* ===================
    _Vector4 Definition
    =================== */
-namespace snowray {
+namespace snowrt {
 
 template <class Scalar> inline _Vector4<Scalar>::_Vector4(): x(0), y(0), z(0), w(0) {}
 template <class Scalar> inline _Vector4<Scalar>::_Vector4(const _Vector4<Scalar>& b): x(b.x), y(b.y), z(b.z), w(b.w) {}

@@ -12,7 +12,7 @@
 #define __RAY_LOG_LEVEL__ spdlog::level::trace
 #endif
 
-namespace snowray {
+namespace snowrt {
 namespace log {
 
 std::vector<std::shared_ptr<spdlog::logger>> &Loggers();

@@ -1,7 +1,7 @@
 #include "log.h"
 #include <vector>
 #include <memory>
-namespace snowray {
+namespace snowrt {
 namespace log {
 
 static bool gLevelSet = false;

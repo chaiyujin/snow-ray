@@ -2,9 +2,10 @@
 #include <cmath>
 #include <limits>
 #include <stdint.h>
+#include <string.h>
 
 /* definitions */
-namespace snowray {
+namespace snowrt {
 // define Float
 #ifdef USING_DOUBLE_PRECISION
 typedef double Float;
@@ -27,9 +28,25 @@ namespace constants {
 }
 
 /* common utils */
-namespace snowray {
+namespace snowrt {
 template <class T, class U>
 inline U Lerp(T t, U a, U b) {
     return a * (1-t) + b * t;
 }
+template <class T, class U>
+inline T Clamp(T x, U a, U b) {
+    if (x < a)      return (T)a;
+    else if (x > b) return (T)b;
+    else return x;
+}
+
+}
+
+/* class collection */
+namespace snowrt {
+
+class Ray;
+class Shape;
+class Interaction;
+
 }

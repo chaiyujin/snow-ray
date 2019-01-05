@@ -8,4 +8,7 @@
 #include "ray.h"
 #include "vec.h"
 #include "vec4.h"
+#include "film.h"
+#include "camera.h"
 #include "bbox.h"
+#include "intersect.h"
