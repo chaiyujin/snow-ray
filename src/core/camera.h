@@ -1,6 +1,7 @@
 #pragma once
 #include "vec.h"
 #include "film.h"
+#include "ray.h"
 
 namespace snowrt {
 
@@ -38,11 +39,14 @@ public:
     }
     virtual ~Camera() {}
 
-    Float3 getRay(const Film &film, uint32_t x, uint32_t y) const {
+    Ray getRay(const Film &film, uint32_t x, uint32_t y) const {
         const auto &res = film.resolution();
         Float sx = (Float)x / (Float)res.x;
         Float sy = 1 - (Float)y / (Float)res.y;
-        return mCorner + mRight * mWidth * sx + mUp * mHeight * sy;
+        return Ray(
+            mEye,
+            mCorner + mRight * mWidth * sx + mUp * mHeight * sy
+        );
     }
 
 };

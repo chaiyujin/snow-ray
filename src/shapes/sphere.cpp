@@ -1,9 +1,16 @@
-#pragma once
 #include "sphere.h"
 
 namespace snowrt {
 
-bool Sphere::intersect(const Ray& ray) const {
+bool Sphere::intersect(const Ray& ray) const {Float phi;
+    Float3 pHit;
+    /* discriminant */
+    Float3 oc = ray.origin() - mCenter;
+    Float a = Dot(ray.direction(), ray.direction());
+    Float b = Dot(ray.direction(), oc);
+    Float c = Dot(oc, oc) - mRadius*mRadius;
+    Float disc = b*b - a*c;
+    if (disc <= 0) return false;
     return true;
 }
 

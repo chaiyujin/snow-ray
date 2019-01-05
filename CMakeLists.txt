@@ -11,6 +11,9 @@ endif(WIN32)
 set(CORE_SOURCES src/core/log.cpp
                  src/core/film.cpp)
 
+# === Shapes Module ===
+set(SHAPES_SOURCES src/shapes/sphere.cpp)
+
 # libs
 if (WIN32)
 else()
@@ -19,4 +22,6 @@ endif(WIN32)
 
 # tests
 add_executable(test_vec test/test_vec.cpp ${CORE_SOURCES})
+add_executable(test_sphere test/test_sphere.cpp ${CORE_SOURCES} ${SHAPES_SOURCES})
 target_link_libraries(test_vec ${BASIC_LIBS})
+target_link_libraries(test_sphere ${BASIC_LIBS})

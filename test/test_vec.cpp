@@ -42,8 +42,8 @@ int main() {
         Camera cam(Float3(0, 0, 0), Float3(0, 0, -1), Float3(0, 1, 0), 45, 1.0);
         for (uint32_t y = 0; y < film.resolution().y; ++y) {
             for (uint32_t x = 0; x < film.resolution().x; ++x) {
-                Float3 ray = cam.getRay(film, x, y);
-                film.update(ray, x, y);
+                auto ray = cam.getRay(film, x, y);
+                film.update(ray.direction(), x, y);
             }
         }
         film.save("test.bmp");
