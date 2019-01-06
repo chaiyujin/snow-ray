@@ -2,6 +2,7 @@
 #include "vec.h"
 #include "film.h"
 #include "ray.h"
+#include "random.h"
 
 namespace snowrt {
 
@@ -29,6 +30,10 @@ class Camera {
         mCorner = mEye + mFront
                 - mRight * mWidth / 2
                 - mUp * mHeight / 2;
+        std::cout << "front: " << mFront << std::endl;
+        std::cout << "up:    " << mUp    << std::endl;
+        std::cout << "right: " << mRight << std::endl;
+        std::cout << "corner: " << mCorner << std::endl;
     }
 public:
     Camera() {}
@@ -45,7 +50,17 @@ public:
         Float sy = 1 - (Float)y / (Float)res.y;
         return Ray(
             mEye,
-            mCorner + mRight * mWidth * sx + mUp * mHeight * sy
+            (mCorner + mRight * mWidth * sx + mUp * mHeight * sy - mEye).normalized()
+        );
+    }
+
+    Ray randomRay(const Film &film, uint32_t x, uint32_t y) const {
+        const auto &res = film.resolution();
+        Float sx = (x + random::uniform() - 0.5) / (Float)res.x;
+        Float sy = 1 - (y + random::uniform() - 0.5) / (Float)res.y;
+        return Ray(
+            mEye,
+            (mCorner + mRight * mWidth * sx + mUp * mHeight * sy - mEye).normalized()
         );
     }
 

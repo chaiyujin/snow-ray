@@ -3,6 +3,7 @@
 #include <limits>
 #include <stdint.h>
 #include <string.h>
+#include <iostream>
 
 /* definitions */
 namespace snowrt {
@@ -12,6 +13,7 @@ typedef double Float;
 #else
 typedef float Float;
 #endif
+
 
 // aligned
 #ifdef WIN32
@@ -39,7 +41,6 @@ inline T Clamp(T x, U a, U b) {
     else if (x > b) return (T)b;
     else return x;
 }
-
 }
 
 /* class collection */

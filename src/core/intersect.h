@@ -25,6 +25,7 @@ struct SurfaceInteraction : public Interaction {
     Float3 dndu, dndv;
     const Shape *shape;
     
+    SurfaceInteraction() : shape(nullptr) {}
     SurfaceInteraction(const Float3 &p, const Float3 &err,
                        const Float2 &uv, const Float3 &wo,
                        const Float3 &dpdu, const Float3 &dpdv,
