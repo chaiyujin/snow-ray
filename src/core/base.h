@@ -7,12 +7,49 @@
 
 /* definitions */
 namespace snowrt {
+
 // define Float
 #ifdef USING_DOUBLE_PRECISION
-typedef double Float;
+typedef double   Float;
+typedef uint64_t UInteger;
+typedef int64_t  Integer;
+#define NEG_ZERO -0.0
+#define POS_ZERO 0.0
 #else
-typedef float Float;
+typedef float    Float;
+typedef uint32_t UInteger;
+typedef int32_t  Integer;
+#define NEG_ZERO -0.f
+#define POS_ZERO 0.f
 #endif
+
+inline UInteger FloatToBits(Float v) {
+    UInteger ret;
+    memcpy(&ret, &v, sizeof(UInteger));
+    return ret;
+}
+
+inline Float BitsToFloat(UInteger v) {
+    Float ret;
+    memcpy(&ret, &v, sizeof(Float));
+    return ret;
+}
+
+inline Float NextFloatUp(Float v) {
+    if (std::isinf(v) && v > POS_ZERO) return v;
+    if (v == NEG_ZERO) v = POS_ZERO;  // -0 -> 0
+    UInteger ui = FloatToBits(v);
+    if (v >= POS_ZERO) ++ui; else --ui;
+    return BitsToFloat(ui);
+}
+
+inline Float NextFloatDown(Float v) {
+    if (std::isinf(v) && v < NEG_ZERO) return v;
+    if (v == POS_ZERO) v = NEG_ZERO;  // 0 -> -0
+    UInteger ui = FloatToBits(v);
+    if (v <= NEG_ZERO) ++ui; else --ui;
+    return BitsToFloat(ui);
+}
 
 
 // aligned
@@ -25,6 +62,7 @@ typedef float Float;
 namespace constants {
     constexpr const Float Infinity = std::numeric_limits<Float>::infinity();
     constexpr const Float MaxFloat = std::numeric_limits<Float>::max();
+    constexpr const Float FloatEpsilon = std::numeric_limits<Float>::epsilon() * 0.5;
     constexpr const Float Pi = (Float)3.14159265358979323846;
 }
 }

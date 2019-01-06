@@ -29,10 +29,19 @@ Float3 radiance(const Ray &ray, int depth) {
     if (insect.shape == nullptr) return Float3();
     const auto *sphere = (const Sphere *)insect.shape;
     const auto *material = sphere->materialPtr();
-    if (++depth>10) return material->emission();
+    auto f = material->albedo();
+    if (++depth>5) {
+        // r.r
+        Float p = (f.x > f.y && f.x > f.z)
+                ? f.x : ((f.y > f.z) ? f.y : f.z);
+        if (random::uniform() < p)
+            f /= p;
+        else 
+            return material->emission();
+    }
     Ray rayIn;
     material->scatter(&insect, rayIn);
-    return material->emission() + material->albedo() * radiance(rayIn, depth);
+    return material->emission() + f * radiance(rayIn, depth);
 }
 
 int main() {
@@ -43,10 +52,11 @@ int main() {
     Film film(UInt2(640, 480));
     Camera cam(Float3(50,52,295.6), Float3(50,52-0.042612,295.6-1),
                Float3(0, 1, 0), 30, film.aspect());
-    const int samples = 32;
+    const int samples = 4;
     Float invsamples = (Float)1 / (Float)samples;
 #pragma omp parallel for schedule(dynamic, 1) private(color)
     for (uint32_t y = 0; y < film.resolution().y; ++y) {
+        std::cout << y << std::endl;
         for (uint32_t x = 0; x < film.resolution().x; ++x) {
             Float3 color;
             for (uint32_t s = 0; s < samples; ++s) {

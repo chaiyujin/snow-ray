@@ -51,6 +51,8 @@
         "utility": "cpp",
         "algorithm": "cpp",
         "numeric": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp"
     }
 }

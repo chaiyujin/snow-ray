@@ -36,13 +36,13 @@ bool Sphere::intersect(const Ray& ray, Float *tHitPtr, SurfaceInteraction *insec
     Float disc = b*b - a*c;
     if (disc > 0) {
         Float tmp = (-b - std::sqrt(disc))/a;
-        if (tmp > 0.1 && tmp < *tHitPtr) {
+        if (tmp > 0.01 && tmp < *tHitPtr) {
             *tHitPtr = tmp;
             setInsect();
             return true;
         }
         tmp = (-b + std::sqrt(disc))/a;
-        if (tmp > 0.1 && tmp < *tHitPtr) {
+        if (tmp > 0.01 && tmp < *tHitPtr) {
             *tHitPtr = tmp;
             setInsect();
             return true;
