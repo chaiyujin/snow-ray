@@ -23,13 +23,15 @@ std::vector<Sphere *> sphereList = {
 };
 
 Float3 radiance(const Ray &ray, int depth, int lastId=-1) {
+    Float tMin = 1e-3;
     Float tMax = MAXFLOAT;
     SurfaceInteraction insect;
     int curId = -1;
     for (int idx = 0; idx < sphereList.size(); ++idx) {
         // if (idx == lastId) continue;
-        if (sphereList[idx]->intersect(ray, &tMax, &insect)) {
+        if (sphereList[idx]->intersect(&insect, ray, tMin, tMax)) {
             curId = idx;
+            tMax = insect.time;
         }
     }
     if (insect.shape == nullptr) return Float3();
@@ -58,7 +60,7 @@ int main() {
     Film film(UInt2(320, 240));
     Camera cam(Float3(50,52,295.6), Float3(50,52-0.042612,295.6-1),
                Float3(0, 1, 0), 30, film.aspect(), 120.0);
-    const int samples = 400;
+    const int samples = 40;
     Float invsamples = (Float)1 / (Float)samples;
 #pragma omp parallel for schedule(dynamic, 1) private(color)
     for (uint32_t y = 0; y < film.resolution().y; ++y) {

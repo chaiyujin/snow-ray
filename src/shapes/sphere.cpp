@@ -2,7 +2,8 @@
 
 namespace snowrt {
 
-bool Sphere::intersect(const Ray& ray) const {Float phi;
+bool Sphere::intersect(const Ray &ray) const {
+    Float phi;
     Float3 pHit;
     /* discriminant */
     Float3 oc = ray.origin() - mCenter;
@@ -14,41 +15,36 @@ bool Sphere::intersect(const Ray& ray) const {Float phi;
     return true;
 }
 
-bool Sphere::intersect(const Ray& ray, Float *tHitPtr, SurfaceInteraction *insectPtr) const {
-    auto setInsect = [&]() -> void {
-        insectPtr->time = *tHitPtr;
-        insectPtr->point = ray(*tHitPtr);
-        insectPtr->normal = (insectPtr->point - mCenter).normalized();
-        insectPtr->wo = -ray.direction();
-        insectPtr->time = *tHitPtr;
-        insectPtr->shape = this;
-        if (Dot(insectPtr->normal, insectPtr->wo) < 0)
-            insectPtr->normal = -insectPtr->normal;
-    };
-
-    Float phi;
-    Float3 pHit;
+bool Sphere::intersect(Interaction *insPtr, const Ray &ray, Float tMin, Float tMax) const {
     /* discriminant */
     Float3 oc = ray.origin() - mCenter;
     Float a = Dot(ray.direction(), ray.direction());
     Float b = Dot(ray.direction(), oc)*2;
     Float c = Dot(oc, oc) - mRadius*mRadius;
-    Float disc = b*b - 4*a*c;
-    if (disc > 0) {
-        Float tmp = 0.5*(-b - std::sqrt(disc))/a;
-        if (tmp > 1e-5 && tmp < *tHitPtr) {
-            *tHitPtr = tmp;
-            setInsect();
-            return true;
-        }
-        tmp = 0.5*(-b + std::sqrt(disc))/a;
-        if (tmp > 1e-5 && tmp < *tHitPtr) {
-            *tHitPtr = tmp;
-            setInsect();
-            return true;
-        }
+    Float t0, t1;
+    if (!Quadratic(a, b, c, &t0, &t1))
+        return false;
+    if (t1 <= tMin || t0 >= tMax)
+        return false;
+    Float t = t0;
+    if (t <= tMin) {
+        t = t1;
+        if (t >= tMax)
+            return false;
     }
-    return false;
+    /* set interaction record */ {
+        auto pt = ray(t);
+        auto n = (pt - mCenter).normalized();
+        if (Dot(n, -ray.direction()) < 0) n = -n;
+        auto *insectPtr = (SurfaceInteraction *)insPtr;
+        insectPtr->time = t;
+        insectPtr->normal = n;
+        insectPtr->point = pt + n * options::DynamicShadowEps(mRadius);
+        insectPtr->wo = -ray.direction();
+        insectPtr->time = t;
+        insectPtr->shape = this;
+    }
+    return true;
 }
 
 

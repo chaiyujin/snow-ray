@@ -13,8 +13,9 @@ public:
     Sphere(const Sphere& b): mCenter(b.mCenter), mRadius(b.mRadius), mMaterialPtr(b.mMaterialPtr) {}
     ~Sphere() {}
 
-    bool intersect(const Ray& ray) const;
-    bool intersect(const Ray& ray, Float *tHitPtr, SurfaceInteraction *insectPtr) const;
+    AABB3f getBounds() const { return AABB3f(mCenter).expanded(mRadius); }
+    bool intersect(const Ray &ray) const;
+    bool intersect(Interaction *insectPtr, const Ray &ray, Float tMin=0, Float tMax=constants::MaxFloat) const;
     const Material *materialPtr() const { return mMaterialPtr; }
 };
 

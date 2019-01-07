@@ -5,7 +5,7 @@
 #include <string.h>
 #include <iostream>
 
-#define USING_DOUBLE_PRECISION
+// #define USING_DOUBLE_PRECISION
 
 // define Float
 #ifdef USING_DOUBLE_PRECISION

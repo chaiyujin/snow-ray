@@ -23,7 +23,7 @@ public:
     virtual void scatter(const SurfaceInteraction *si, Ray &rayIn) const {
         auto wi = random::InHemiShpere(si->normal);
         rayIn.setOrigin(si->point);
-        rayIn.setDirection(wi.normalized());
+        rayIn.setDirection(wi);
     }
 };
 
@@ -32,8 +32,20 @@ public:
     IdeaSpecular(const Float3 &emission, const Float3 &albedo)
         : Material(emission, albedo) {}
     virtual void scatter(const SurfaceInteraction *si, Ray &rayIn) const {
+        auto wi = -Reflect(si->wo, si->normal).normalized();
         rayIn.setOrigin(si->point);
-        rayIn.setDirection(-Reflect(si->wo, si->normal).normalized());
+        rayIn.setDirection(wi);
+    }
+};
+
+class IdeaRefraction : public Material {
+public:
+    IdeaRefraction(const Float3 &emission, const Float3 &albedo)
+        : Material(emission, albedo) {}
+    virtual void scatter(const SurfaceInteraction *si, Ray &rayIn) const {
+        auto wi = -Reflect(si->wo, si->normal).normalized();
+        rayIn.setOrigin(si->point);
+        rayIn.setDirection(wi);
     }
 };
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "../utils/utils.h"
+#include "bbox.h"
 
 namespace snowrt {
 
@@ -40,8 +41,9 @@ struct SurfaceInteraction : public Interaction {
 /* interface of hitable */
 class IHitable {
 public:
+    /* get world bounding box */
     virtual AABB3f getBounds() const = 0;
-    virtual bool intersect(const Ray &ray, Float tMin=0, Float tMax=constants::MaxFloat) const = 0;
+    virtual bool intersect(const Ray &ray) const = 0;
     virtual bool intersect(Interaction *insectPtr, const Ray &ray, Float tMin=0, Float tMax=constants::MaxFloat) const = 0;
 };
 

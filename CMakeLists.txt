@@ -10,6 +10,7 @@ endif(WIN32)
 # === Core Module ===
 set(CORE_SOURCES src/core/utils/log.cpp
                  src/core/utils/random.cpp
+                 src/core/utils/options.cpp
                  src/core/base/film.cpp)
 
 # === Shapes Module ===
