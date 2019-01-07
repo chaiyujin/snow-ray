@@ -21,8 +21,10 @@ public:
     IdeaDiffuse(const Float3 &emission, const Float3 &albedo)
         : Material(emission, albedo) {}
     virtual void scatter(const SurfaceInteraction *si, Ray &rayIn) const {
-        auto wi = random::InHemiShpere(si->normal);
-        rayIn.setOrigin(si->point);
+        auto n = si->normal;
+        if (Dot(n, si->wo) < 0) n = -n;
+        auto wi = random::InHemiShpere(n);
+        rayIn.setOrigin(si->point + n * si->shadowBias);
         rayIn.setDirection(wi);
     }
 };
@@ -32,8 +34,10 @@ public:
     IdeaSpecular(const Float3 &emission, const Float3 &albedo)
         : Material(emission, albedo) {}
     virtual void scatter(const SurfaceInteraction *si, Ray &rayIn) const {
-        auto wi = -Reflect(si->wo, si->normal).normalized();
-        rayIn.setOrigin(si->point);
+        auto n = si->normal;
+        if (Dot(n, si->wo) < 0) n = -n;
+        auto wi = -Reflect(si->wo, n).normalized();
+        rayIn.setOrigin(si->point + n * si->shadowBias);
         rayIn.setDirection(wi);
     }
 };

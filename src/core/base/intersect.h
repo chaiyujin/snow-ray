@@ -12,13 +12,14 @@ struct Interaction {
     Float3 pError;
     Float3 wo;
     Float  time;
+    Float  shadowBias;
 
     Interaction() {}
     Interaction(const Float3 &p, const Float3 &n, const Float3 &err,
                 const Float3 &wo, Float time)
-        : point(p), normal(n), pError(err), wo(wo), time(time) {}
+        : point(p), normal(n), pError(err), wo(wo), time(time)
+        , shadowBias(options::MinShadowBias) {}
     virtual ~Interaction() {}
-
 };
 
 struct SurfaceInteraction : public Interaction {

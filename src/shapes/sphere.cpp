@@ -35,11 +35,11 @@ bool Sphere::intersect(Interaction *insPtr, const Ray &ray, Float tMin, Float tM
     /* set interaction record */ {
         auto pt = ray(t);
         auto n = (pt - mCenter).normalized();
-        if (Dot(n, -ray.direction()) < 0) n = -n;
         auto *insectPtr = (SurfaceInteraction *)insPtr;
         insectPtr->time = t;
         insectPtr->normal = n;
-        insectPtr->point = pt + n * options::DynamicShadowEps(mRadius);
+        insectPtr->point = pt;
+        insectPtr->shadowBias = options::DynamicShadowBias(mRadius);
         insectPtr->wo = -ray.direction();
         insectPtr->time = t;
         insectPtr->shape = this;

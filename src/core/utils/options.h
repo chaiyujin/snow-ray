@@ -4,16 +4,16 @@
 namespace snowrt {
 namespace options {
 
-extern Float MinShadowEps;
-extern Float MaxShadowEps;
-extern Float ScaleShadowEps;
+extern Float MinShadowBias;
+extern Float MaxShadowBias;
+extern Float ScaleShadowBias;
 
-inline Float DynamicShadowEps(Float size) {
+inline Float DynamicShadowBias(Float size) {
     return std::min(
-        MaxShadowEps,
+        MaxShadowBias,
         std::max(
-            MinShadowEps,
-            size * ScaleShadowEps
+            MinShadowBias,
+            size * ScaleShadowBias
         )
     );
 }
