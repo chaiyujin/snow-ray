@@ -3,6 +3,8 @@
 
 namespace snowrt {
 
+/* struct of interaction */
+
 struct Interaction {
     Float3 point;
     Float3 normal;
@@ -33,6 +35,14 @@ struct SurfaceInteraction : public Interaction {
         : Interaction(p, Cross(dpdu, dpdv).normalized(), err, wo, time)
         , uv(uv), dpdu(dpdu), dpdv(dpdv), dndu(dndu), dndv(dndv)
         , shape(shape) {}
+};
+
+/* interface of hitable */
+class IHitable {
+public:
+    virtual AABB3f getBounds() const = 0;
+    virtual bool intersect(const Ray &ray, Float tMin=0, Float tMax=constants::MaxFloat) const = 0;
+    virtual bool intersect(Interaction *insectPtr, const Ray &ray, Float tMin=0, Float tMax=constants::MaxFloat) const = 0;
 };
 
 }

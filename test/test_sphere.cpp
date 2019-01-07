@@ -18,6 +18,7 @@ std::vector<Sphere *> sphereList = {
     new Sphere(Float3(50,40.8, 1e5),      1e5, diffMat2),
     new Sphere(Float3(50, 1e5, 81.6),     1e5, diffMat2),
     new Sphere(Float3(50,-1e5+81.6,81.6), 1e5, diffMat2),
+    new Sphere(Float3(50,40.8,-1e5+200),  1e5, diffMat3),
     new Sphere(Float3(50,681.6-.27,81.6), 600, diffMat4)
 };
 
@@ -56,8 +57,8 @@ int main() {
 
     Film film(UInt2(320, 240));
     Camera cam(Float3(50,52,295.6), Float3(50,52-0.042612,295.6-1),
-               Float3(0, 1, 0), 30, film.aspect());
-    const int samples = 32;
+               Float3(0, 1, 0), 30, film.aspect(), 120.0);
+    const int samples = 400;
     Float invsamples = (Float)1 / (Float)samples;
 #pragma omp parallel for schedule(dynamic, 1) private(color)
     for (uint32_t y = 0; y < film.resolution().y; ++y) {

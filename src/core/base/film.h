@@ -1,19 +1,20 @@
 #pragma once
 #include "../utils/utils.h"
+#include "spectrum.h"
 #include <string>
 
 namespace snowrt {
 
 class Film {
-    UInt2   mRes;
-    Float3 *mDataPtr;
+    UInt2     mRes;
+    Spectrum *mDataPtr;
 public:
     Film() {}
     Film(const UInt2& resolution)
         : mRes(resolution)
         , mDataPtr(nullptr) {
         // alloc data
-        mDataPtr = new Float3[mRes.x * mRes.y];
+        mDataPtr = new Spectrum[mRes.x * mRes.y];
         this->clear();
     }
     virtual ~Film() { delete[] mDataPtr; }

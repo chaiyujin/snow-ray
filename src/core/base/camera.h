@@ -12,6 +12,7 @@ class Camera {
     Float3 mRight;
     Float  mFoV;    // Height field of view
     Float  mAspect; // W/H
+    Float  mNear;
     Float  mHeight;
     Float  mWidth;
     Float3 mCorner;
@@ -36,9 +37,10 @@ class Camera {
     }
 public:
     Camera() {}
-    Camera(const Float3 &eye, const Float3 &lookAt, const Float3 &up, Float fov, Float aspect)
+    Camera(const Float3 &eye, const Float3 &lookAt, const Float3 &up,
+           Float fov, Float aspect, Float near)
         : mEye(eye), mFront(lookAt-eye), mUp(up)
-        , mFoV(fov), mAspect(aspect) {
+        , mFoV(fov), mAspect(aspect), mNear(near) {
         this->_adjust();
     }
     virtual ~Camera() {}
@@ -47,20 +49,16 @@ public:
         const auto &res = film.resolution();
         Float sx = (Float)x / (Float)res.x;
         Float sy = 1 - (Float)y / (Float)res.y;
-        return Ray(
-            mEye,
-            (mCorner + mRight * mWidth * sx + mUp * mHeight * sy - mEye).normalized()
-        );
+        auto dir = (mCorner + mRight * mWidth * sx + mUp * mHeight * sy - mEye).normalized();
+        return Ray(mEye+mNear*dir, dir);
     }
 
     Ray randomRay(const Film &film, uint32_t x, uint32_t y) const {
         const auto &res = film.resolution();
         Float sx = (x + random::uniform() - 0.5) / (Float)res.x;
         Float sy = 1 - (y + random::uniform() - 0.5) / (Float)res.y;
-        return Ray(
-            mEye,
-            (mCorner + mRight * mWidth * sx + mUp * mHeight * sy - mEye).normalized()
-        );
+        auto dir = (mCorner + mRight * mWidth * sx + mUp * mHeight * sy - mEye).normalized();
+        return Ray(mEye+mNear*dir, dir);
     }
 
 };

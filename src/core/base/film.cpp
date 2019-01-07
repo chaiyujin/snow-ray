@@ -16,11 +16,10 @@ void Film::save(std::string filename) {
     uint8_t *data = new uint8_t[W * H * 3];
     for (uint32_t y = 0; y < H; ++y) {
         for (uint32_t x = 0; x < W; ++x) {
-            const auto &rgb = mDataPtr[y*W+x];
+            const auto &rgb = mDataPtr[y*W+x].toRGB();
             const uint32_t idx = (y*W+x)*3;
-            data[idx + 0] = toByte(rgb.x); 
-            data[idx + 1] = toByte(rgb.y); 
-            data[idx + 2] = toByte(rgb.z); 
+            for (uint32_t k = 0; k < 3; ++k)
+                data[idx+k] = rgb[k];
         }
     }
     stbi_write_png(filename.c_str(), W, H, 3, data, W*3);
