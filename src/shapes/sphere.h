@@ -1,6 +1,7 @@
 #pragma once
 #include <core/log.h>
 #include <core/shape.h>
+#include <core/efloat.h>
 #include <core/material.h>
 
 namespace snowrt {

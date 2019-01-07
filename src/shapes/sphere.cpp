@@ -31,18 +31,18 @@ bool Sphere::intersect(const Ray& ray, Float *tHitPtr, SurfaceInteraction *insec
     /* discriminant */
     Float3 oc = ray.origin() - mCenter;
     Float a = Dot(ray.direction(), ray.direction());
-    Float b = Dot(ray.direction(), oc);
+    Float b = Dot(ray.direction(), oc)*2;
     Float c = Dot(oc, oc) - mRadius*mRadius;
-    Float disc = b*b - a*c;
+    Float disc = b*b - 4*a*c;
     if (disc > 0) {
-        Float tmp = (-b - std::sqrt(disc))/a;
-        if (tmp > 0.01 && tmp < *tHitPtr) {
+        Float tmp = 0.5*(-b - std::sqrt(disc))/a;
+        if (tmp > 1e-5 && tmp < *tHitPtr) {
             *tHitPtr = tmp;
             setInsect();
             return true;
         }
-        tmp = (-b + std::sqrt(disc))/a;
-        if (tmp > 0.01 && tmp < *tHitPtr) {
+        tmp = 0.5*(-b + std::sqrt(disc))/a;
+        if (tmp > 1e-5 && tmp < *tHitPtr) {
             *tHitPtr = tmp;
             setInsect();
             return true;

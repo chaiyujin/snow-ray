@@ -8,6 +8,8 @@
 /* definitions */
 namespace snowrt {
 
+// #define USING_DOUBLE_PRECISION
+
 // define Float
 #ifdef USING_DOUBLE_PRECISION
 typedef double   Float;

@@ -12,3 +12,4 @@
 #include "camera.h"
 #include "bbox.h"
 #include "intersect.h"
+#include "efloat.h"
