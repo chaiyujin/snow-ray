@@ -8,9 +8,9 @@ if (WIN32)
 endif(WIN32)
 
 # === Core Module ===
-set(CORE_SOURCES src/core/log.cpp
-                 src/core/film.cpp
-                 src/core/random.cpp)
+set(CORE_SOURCES src/core/utils/log.cpp
+                 src/core/utils/random.cpp
+                 src/core/base/film.cpp)
 
 # === Shapes Module ===
 set(SHAPES_SOURCES src/shapes/sphere.cpp)

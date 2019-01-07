@@ -1,8 +1,7 @@
 #pragma once
-#include "vec.h"
+#include "../utils/utils.h"
 #include "film.h"
 #include "ray.h"
-#include "random.h"
 
 namespace snowrt {
 

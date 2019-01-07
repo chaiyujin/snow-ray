@@ -4,12 +4,12 @@
  * Using the right-handed coordinate system same as OpenGL.
  * */
 
-#include "log.h"
-#include "ray.h"
-#include "vec.h"
-#include "vec4.h"
-#include "film.h"
-#include "camera.h"
-#include "bbox.h"
-#include "intersect.h"
-#include "efloat.h"
+/* include utils */
+#include "utils/utils.h"
+#include "base/bbox.h"
+#include "base/camera.h"
+#include "base/film.h"
+#include "base/intersect.h"
+#include "base/material.h"
+#include "base/ray.h"
+#include "base/shape.h"

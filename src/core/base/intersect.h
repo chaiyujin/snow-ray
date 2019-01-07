@@ -1,6 +1,5 @@
 #pragma once
-#include "base.h"
-#include "vec.h"
+#include "../utils/utils.h"
 
 namespace snowrt {
 

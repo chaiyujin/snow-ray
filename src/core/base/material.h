@@ -1,7 +1,6 @@
 #pragma once
-#include "vec.h"
+#include "../utils/utils.h"
 #include "ray.h"
-#include "random.h"
 #include "intersect.h"
 
 namespace snowrt {
@@ -22,7 +21,7 @@ public:
     IdeaDiffuse(const Float3 &emission, const Float3 &albedo)
         : Material(emission, albedo) {}
     virtual void scatter(const SurfaceInteraction *si, Ray &rayIn) const {
-        auto wi = random::Vector3InHalfUnitSphere(si->normal);
+        auto wi = random::InHemiShpere(si->normal);
         rayIn.setOrigin(si->point);
         rayIn.setDirection(wi.normalized());
     }

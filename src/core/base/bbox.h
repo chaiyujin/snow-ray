@@ -1,6 +1,5 @@
 #pragma once
-#include "vec.h"
-#include "log.h"
+#include "../utils/utils.h"
 
 /* ===================
    _AABB2 Declaration
