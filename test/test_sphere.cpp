@@ -3,7 +3,7 @@
 #include <vector>
 using namespace snowrt;
 
-Material *refrMat0 = new IdeaRefraction(Float3(0,0,0), Float3(.999f,.999f,.999f), 2.4);
+Material *refrMat0 = new IdeaRefraction(Float3(0,0,0), Float3(.999f,.999f,.999f), 1.5);
 Material *specMat  = new IdeaSpecular(Float3(0,0,0), Float3(.999f,.999f,.999f));
 Material *diffMat0 = new IdeaDiffuse(Float3(0,0,0),  Float3(.75f,.25f,.25f));
 Material *diffMat1 = new IdeaDiffuse(Float3(0,0,0),  Float3(.25f,.25f,.75f));
@@ -52,7 +52,7 @@ Float3 radiance(const Ray &ray, int depth, int lastId=-1) {
     }
     Ray rayIn;
     material->scatter(&insect, rayIn);
-    return material->emission() + f * radiance(rayIn, depth, curId); //* std::abs(Dot(insect.normal, rayIn.direction()));
+    return material->emission() + f * radiance(rayIn, depth, curId);
 }
 
 int main() {
