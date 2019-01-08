@@ -26,6 +26,7 @@ public:
         auto wi = random::InHemiShpere(n);
         rayIn.setOrigin(si->point + n * si->shadowBias);
         rayIn.setDirection(wi);
+        rayIn.setProb(1/(Dot(n,wi) * constants::Pi));
     }
 };
 
@@ -69,6 +70,7 @@ public:
                 Float c = 1 - (into ? theta1 : theta2);
                 Float cc = c*c;
                 F = r0 + (1-r0)*cc*cc*c;
+                F = 0.25 + 0.5 * F;
             }
         }
         if (random::uniform() < F) {

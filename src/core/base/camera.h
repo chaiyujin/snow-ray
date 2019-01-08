@@ -45,7 +45,7 @@ public:
     }
     virtual ~Camera() {}
 
-    Ray getRay(const Film &film, uint32_t x, uint32_t y) const {
+    Ray getRay(const Film &film, Float x, Float y) const {
         const auto &res = film.resolution();
         Float sx = (Float)x / (Float)res.x;
         Float sy = 1 - (Float)y / (Float)res.y;
@@ -53,10 +53,14 @@ public:
         return Ray(mEye+mNear*dir, dir);
     }
 
-    Ray randomRay(const Film &film, uint32_t x, uint32_t y) const {
+    Ray randomRay(const Film &film, Float x, Float y, Float size=1) const {
         const auto &res = film.resolution();
-        Float sx = (x + random::uniform() - 0.5) / (Float)res.x;
-        Float sy = 1 - (y + random::uniform() - 0.5) / (Float)res.y;
+        Float dx = random::uniform()*2; dx = (dx<1)? std::sqrt(dx)-1 : 1-std::sqrt(2-dx);
+        Float dy = random::uniform()*2; dy = (dy<1)? std::sqrt(dy)-1 : 1-std::sqrt(2-dy);
+        dx *= size;
+        dy *= size;
+        Float sx = (x + dx) / (Float)res.x;
+        Float sy = 1 - (y + dy) / (Float)res.y;
         auto dir = (mCorner + mRight * mWidth * sx + mUp * mHeight * sy - mEye).normalized();
         return Ray(mEye+mNear*dir, dir);
     }
